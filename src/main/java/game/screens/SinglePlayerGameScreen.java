@@ -2,6 +2,7 @@ package game.screens;
 
 import game.GameCanvas;
 import game.GameData;
+import game.controller.ComputerPaddleController;
 import game.controller.KeyPaddleController;
 import game.items.Ball;
 import game.items.Paddle;
@@ -17,6 +18,7 @@ public class SinglePlayerGameScreen extends Screen{
 
     GameData data;
     Properties properties;
+    ComputerPaddleController leftController;
 
     public SinglePlayerGameScreen(GameCanvas canvas) {
         super(canvas);
@@ -72,6 +74,7 @@ public class SinglePlayerGameScreen extends Screen{
         }
 
         if(data.gameState == GameState.PLAYING) {
+            leftController.tick();
             leftPaddle.tick();
             rightPaddle.tick();
             ball.tick();
@@ -93,8 +96,7 @@ public class SinglePlayerGameScreen extends Screen{
 
     private void createLeftPaddle(){
         // create paddles
-        KeyPaddleController leftController = new KeyPaddleController(KeyEvent.VK_W, KeyEvent.VK_S);
-        canvas.addKeyListener(leftController);
+        leftController = new ComputerPaddleController();
         Paddle leftPaddle = new Paddle(
                 Integer.parseInt(properties.getProperty("x1")),
                 Integer.parseInt(properties.getProperty("y1")),  Integer.parseInt(properties.getProperty("w1")),

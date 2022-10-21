@@ -26,7 +26,6 @@ public class Ball extends GameElement {
         x += vx;
         y += vy;
 
-
         // check ball wall collisions
         // top of screen
         if(y-height/2 <= 0){
