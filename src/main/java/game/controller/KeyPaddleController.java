@@ -1,4 +1,6 @@
-package game;
+package game.controller;
+
+import game.items.Paddle;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,6 +9,7 @@ public class KeyPaddleController implements PaddleController, KeyListener {
     
     boolean upPressed, downPressed;
     int upKey, downKey;
+    Paddle paddle;
     
     public KeyPaddleController(int upKey, int downKey) {
         upPressed = false;
@@ -17,12 +20,17 @@ public class KeyPaddleController implements PaddleController, KeyListener {
     
     @Override
     public boolean isUpPressed() {
-        return false;
+        return upPressed;
     }
 
     @Override
     public boolean isDownPressed() {
-        return false;
+        return downPressed;
+    }
+
+    @Override
+    public void setPaddle(Paddle paddle) {
+        this.paddle = paddle;
     }
 
     @Override

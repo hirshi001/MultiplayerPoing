@@ -1,0 +1,17 @@
+width=800
+height=600
+x1=50
+y1=150
+w1=10
+h1=100
+s1=7
+x2=740
+y2=450
+w2=10
+h2=100
+s2=7
+ballx=400
+bally=300
+ballw=10
+ballh=10
+balls=5

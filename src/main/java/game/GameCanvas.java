@@ -1,42 +1,49 @@
 package game;
 
+import game.screens.Screen;
+import game.screens.SinglePlayerGameScreen;
+import game.startup.GameManager;
+
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
-public class GameCanvas extends Canvas{
+public class GameCanvas extends JPanel {
 
-    private static final int START_PADDLE_DISTANCE_WALL = 50;
-    private static final int PADDLE_WIDTH = 10;
+    public GameManager manager;
+    public Screen screen;
 
 
-    public Paddle leftPaddle, rightPaddle;
-    private final int width, height;
+    public GameCanvas(GameManager manager) {
+        this.manager = manager;
 
-    public GameCanvas(int width, int height) {
-        this.width = width;
-        this.height = height;
+    }
+
+    public void setScreen(Screen screen){
+        removeAll();
     }
 
     /**
      * Called when the canvas is first created, before the paint method is called.
      */
     public void start() {
-        KeyPaddleController leftController = new KeyPaddleController(KeyEvent.VK_W, KeyEvent.VK_S);
-        addKeyListener(leftController);
-        leftPaddle = new Paddle(START_PADDLE_DISTANCE_WALL, Paddle.startY, PADDLE_WIDTH, Paddle.HEIGHT, leftController);
-
-        KeyPaddleController rightController = new KeyPaddleController(KeyEvent.VK_UP, KeyEvent.VK_DOWN);
-        addKeyListener(rightController);
-        rightPaddle = new Paddle(START_PADDLE_DISTANCE_WALL, Paddle.startY, PADDLE_WIDTH, Paddle.HEIGHT, rightController);
-
+        screen = new SinglePlayerGameScreen(this);
+        screen.show();
     }
+
 
     /**
      * Called at a constant rate, this is the main game loop.
      */
-    public void render(){
-        Graphics2D g = (Graphics2D) getGraphics();
+    public void tick(){
+        // tick
+        screen.tick();
+
 
     }
 
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        screen.draw((Graphics2D) g);
+    }
 }
